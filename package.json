@@ -1,0 +1,9 @@
+{
+  "name": "taskcluster-lib-artifact",
+  "version": "1.0.0",
+  "description": "Library for interacting with Taskcluster Artifacts",
+  "main": "lib/index.js",
+  "repository": "https://github.com/taskcluster/taskcluster-lib-artifact",
+  "author": "John Ford <jhford@mozilla.com>",
+  "license": "MPL-2.0"
+}
