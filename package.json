@@ -5,5 +5,15 @@
   "main": "lib/index.js",
   "repository": "https://github.com/taskcluster/taskcluster-lib-artifact",
   "author": "John Ford <jhford@mozilla.com>",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "scripts": {
+    "test": "DEBUG= mocha"
+  },
+  "dependencies": {
+    "remotely-signed-s3": "^2.0.0"
+  },
+  "devDependencies": {
+    "assume": "^1.5.1",
+    "mocha": "^3.5.0"
+  }
 }
