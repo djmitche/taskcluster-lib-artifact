@@ -81,6 +81,7 @@ describe('taskcluster-lib-artifact', () => {
         name: 'name',
         filename: downloadFilename,
       });
+      checkFilesEqual(uploadFilename, downloadFilename);
     });
 
     it('should upload and download a file without compression with multiple parts', async () => {
@@ -100,6 +101,7 @@ describe('taskcluster-lib-artifact', () => {
         name: 'name',
         filename: downloadFilename,
       });
+      checkFilesEqual(uploadFilename, downloadFilename);
     });
   });
 
@@ -122,6 +124,7 @@ describe('taskcluster-lib-artifact', () => {
         name: 'name',
         filename: downloadFilename,
       });
+      checkFilesEqual(uploadFilename, downloadFilename);
     });
 
     it('should upload and download a file with compression in multiple parts', async () => {
@@ -142,6 +145,7 @@ describe('taskcluster-lib-artifact', () => {
         name: 'name',
         filename: downloadFilename,
       });
+      checkFilesEqual(uploadFilename, downloadFilename);
     });
   });
 });
