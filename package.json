@@ -5,5 +5,21 @@
   "main": "lib/index.js",
   "repository": "https://github.com/taskcluster/taskcluster-lib-artifact",
   "author": "John Ford <jhford@mozilla.com>",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "scripts": {
+    "compile": "babel-compile -p taskcluster src:lib test-src:test",
+    "pretest": "yarn compile",
+    "prepublish": "yarn compile",
+    "test": "DEBUG= mocha"
+  },
+  "dependencies": {
+    "babel-compile": "^2.0.0",
+    "babel-preset-taskcluster": "^3.0.0",
+    "commander": "^2.11.0",
+    "remotely-signed-s3": "^2.0.0"
+  },
+  "devDependencies": {
+    "assume": "^1.5.1",
+    "mocha": "^3.5.0"
+  }
 }
