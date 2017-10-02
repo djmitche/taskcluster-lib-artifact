@@ -66,9 +66,18 @@ class Artifact {
 
   /**
    * Get a URL from the Taskcluster Queue based on task metadata
+   *
+   * If runId is not given, the latest run of the taskId is used.
    */
   async get({taskId, runId, name, filename}) {
-    let url = this.__queue.buildUrl(this.__queue.getArtifact, taskId, runId, name);
+    let url;
+    
+    if (runId === undefined) {
+      url = this.__queue.buildUrl(this.__queue.getLatestArtifact, taskId, name);
+    } else {
+      url = this.__queue.buildUrl(this.__queue.getArtifact, taskId, runId, name);
+    }
+
     await this.__client.downloadUrl({url, output: filename});
   }
 

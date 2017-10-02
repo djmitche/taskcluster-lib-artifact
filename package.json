@@ -8,6 +8,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "compile": "babel-compile -p taskcluster src:lib test-src:test",
+    "install": "yarn compile",
     "pretest": "yarn compile",
     "prepublish": "yarn compile",
     "test": "DEBUG= mocha"
