@@ -17,7 +17,7 @@
     "babel-compile": "^2.0.0",
     "babel-preset-taskcluster": "^3.0.0",
     "commander": "^2.11.0",
-    "remotely-signed-s3": "^2.0.0"
+    "remotely-signed-s3": "^3.1.0"
   },
   "devDependencies": {
     "assume": "^1.5.1",

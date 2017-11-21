@@ -37,9 +37,14 @@ describe('taskcluster-lib-artifact', () => {
   let expires = new Date();
   expires.setDate(expires.getDate() + 1);
 
-  beforeEach(() => {
-    queue = new Queue({});
+  beforeEach(async () => {
+    queue = new Queue({bucket: 'test-bucket-for-any-garbage', port: 30000});
+    await queue.start();
     subject = new Artifact({queue});
+  });
+
+  afterEach(async () => {
+    await queue.stop();
   });
 
   describe('helper functions', () => {

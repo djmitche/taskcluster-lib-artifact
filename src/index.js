@@ -1,5 +1,6 @@
 'use strict';
 const assert = require('assert');
+const urllib = require('url');
 const {Client} = require('remotely-signed-s3');
 
 class Artifact {
@@ -78,7 +79,35 @@ class Artifact {
       url = this.__queue.buildUrl(this.__queue.getArtifact, taskId, runId, name);
     }
 
-    await this.__client.downloadUrl({url, output: filename});
+    let {body, headers, statusCode, statusMessage} = await this.__client.runner.run({
+      req: {
+        url,
+        method: 'GET',
+        headers: {},
+      },
+      body: '',
+    });
+
+    // We only want to follow specific redirects
+    if (![301, 302, 303, 307, 308].includes(statusCode)) {
+      throw new Error('Redirect was not a valid status code (' + statusCode + ')');
+    }
+
+    let artifactUrl = headers.location;
+
+    if (typeof artifactUrl !== 'string') {
+      throw new Error('Redirect has missing Location key');
+    }
+
+    // We only want to parse the URL to ensure that it's a valid URL.  We're
+    // going to avoid parsing and reserializing because that could lead to
+    // subtle errors which we really don't have any reason to want to introduce
+    // here
+    if (urllib.parse(artifactUrl).protocol !== 'https:') {
+      throw new Error('Redirect must be to an https resource, but got ' + artifactUrl);
+    }
+
+    await this.__client.downloadUrl({url: artifactUrl, output: filename});
   }
 
   /**
